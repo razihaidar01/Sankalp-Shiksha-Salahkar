@@ -20,16 +20,21 @@ export const LoadingScreen = () => {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-card overflow-hidden"
-          exit={{ clipPath: "inset(0 0 100% 0)", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white overflow-hidden"
+          exit={{
+            clipPath: "inset(0 0 0 100%)",
+            transition: { duration: 0.65, ease: [0.76, 0, 0.24, 1] }
+          }}
         >
+          {/* Background glow */}
           <motion.div
             className="absolute w-96 h-96 rounded-full pointer-events-none"
-            style={{ background: "radial-gradient(circle, hsla(235,85%,60%,0.12) 0%, transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, hsla(235,85%,60%,0.10) 0%, transparent 70%)" }}
             animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           />
 
+          {/* Logo + name */}
           <motion.div
             initial={{ scale: 0.7, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -39,7 +44,7 @@ export const LoadingScreen = () => {
             <div className="relative">
               <motion.div
                 className="absolute -inset-6 rounded-full"
-                style={{ background: "radial-gradient(circle, hsla(27,100%,50%,0.15) 0%, transparent 70%)" }}
+                style={{ background: "radial-gradient(circle, hsla(27,100%,50%,0.12) 0%, transparent 70%)" }}
                 animate={{ scale: [1, 1.25, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
@@ -60,9 +65,10 @@ export const LoadingScreen = () => {
             </motion.span>
           </motion.div>
 
+          {/* Letter-by-letter tagline */}
           <div className="mt-6 h-8 flex items-center px-4">
             {showTagline && (
-              <div className="flex flex-wrap justify-center text-sm sm:text-base text-muted-foreground tracking-wide">
+              <div className="flex flex-wrap justify-center text-sm sm:text-base text-gray-500 tracking-wide">
                 {tagline.split("").map((char, i) => (
                   <motion.span
                     key={i}
@@ -70,13 +76,14 @@ export const LoadingScreen = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.028, duration: 0.3, ease: "easeOut" }}
                   >
-                    {char === " " ? " " : char}
+                    {char === " " ? "\u00A0" : char}
                   </motion.span>
                 ))}
               </div>
             )}
           </div>
 
+          {/* Progress bar at bottom */}
           <motion.div
             className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary via-accent to-primary"
             initial={{ width: "0%" }}
