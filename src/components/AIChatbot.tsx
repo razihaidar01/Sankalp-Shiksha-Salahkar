@@ -66,7 +66,7 @@ RESPONSE STYLE:
 - Always offer to help further
 - Never make up information not in this prompt`;
 
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent";
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent";
 
 const callGemini = async (messages: Message[]): Promise<string> => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
