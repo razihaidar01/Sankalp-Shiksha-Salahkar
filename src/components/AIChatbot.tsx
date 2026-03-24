@@ -66,13 +66,12 @@ RESPONSE STYLE:
 - Always offer to help further
 - Never make up information not in this prompt`;
 
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent";
 
 const callGemini = async (messages: Message[]): Promise<string> => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
-  if (!apiKey || apiKey === "AIzaSyDfH1YqeE2SMwipgaAywU5WCwog9IjBKhI") {
-    return getFallbackResponse(messages[messages.length - 1]?.content || "");
+  if (!apiKey || apiKey === "your_gemini_api_key_here") {
   }
 
   const contents = messages.map(m => ({
@@ -96,7 +95,8 @@ const callGemini = async (messages: Message[]): Promise<string> => {
 
   if (!response.ok) {
     const err = await response.json();
-    console.error("Gemini error:", err);
+    console.error("Gemini API error:", JSON.stringify(err));
+    return `Error: ${err?.error?.message || "API call failed"}`;
     return getFallbackResponse(messages[messages.length - 1]?.content || "");
   }
 
@@ -129,7 +129,7 @@ const getFallbackResponse = (input: string): string => {
   if (q.includes("mba"))
     return "Top MBA options: SRM Ghaziabad ₹4.21L, Magadh Patna ₹2.51L (most affordable!), Sandip University Bihar ₹3.8L. Which budget suits you?";
 
-  return "Namaste! 🙏 I'm your AI counselor at Sankalp Shiksha Salahkar. Ask me about colleges, courses, Bihar Student Credit Card, scholarships, or career guidance!\n\n⚠️ Add your Gemini API key in .env for full AI responses.";
+  return "Namaste! 🙏 Main hoon aapka AI education counselor at Sankalp Shiksha Salahkar. Aap mujhse Hindi, English ya Bhojpuri mein pooch sakte hain — college fees, admissions, Bihar Student Credit Card, scholarships sab ke baare mein!";
 };
 
 export const AIChatbot = () => {
