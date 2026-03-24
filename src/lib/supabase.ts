@@ -6,8 +6,8 @@ const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 export const isSupabaseReady = !!(
   SUPABASE_URL &&
   SUPABASE_ANON_KEY &&
-  SUPABASE_URL !== "your_supabase_project_url_here" &&
-  SUPABASE_ANON_KEY !== "your_supabase_anon_key_here"
+  SUPABASE_URL !== "https://pertweivyzgfjknmmzoj.supabase.co" &&
+  SUPABASE_ANON_KEY !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBlcnR3ZWl2eXpnZmprbm1tem9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM1NjUsImV4cCI6MjA4OTgzOTU2NX0.-HvOXZe594X8Vce18NpFQQIrWMqCLY-p6OrWj1mhxC8"
 );
 
 export const supabase = isSupabaseReady

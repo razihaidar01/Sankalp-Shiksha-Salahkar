@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import logo from "@/assets/logo.png";
+import { getGalleryPhotos, isSupabaseReady } from "@/lib/supabase";
 
 /* ─── Animated Counter ─── */
 const Counter = ({ end, suffix = "" }: { end: number; suffix?: string }) => {
@@ -437,13 +438,11 @@ const Gallery = () => {
   const [realPhotos, setRealPhotos] = useState<{id:string;image_url:string;title:string;category:string}[]>([]);
 
   useEffect(() => {
-    import("@/lib/supabase").then(({ getGalleryPhotos, isSupabaseReady }) => {
-      if (isSupabaseReady) {
-        getGalleryPhotos().then(photos => {
-          if (photos && photos.length > 0) setRealPhotos(photos);
-        }).catch(() => {});
-      }
-    });
+    if (isSupabaseReady) {
+      getGalleryPhotos()
+        .then(photos => { if (photos && photos.length > 0) setRealPhotos(photos); })
+        .catch(() => {});
+    }
   }, []);
 
   const placeholders = [

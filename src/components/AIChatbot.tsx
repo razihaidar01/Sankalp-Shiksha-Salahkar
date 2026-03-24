@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, Bot, User } from "lucide-react";
+import { X, Send, Bot, User, Sparkles } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -71,7 +71,7 @@ const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/
 const callGemini = async (messages: Message[]): Promise<string> => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
-  if (!apiKey || apiKey === "your_gemini_api_key_here") {
+  if (!apiKey || apiKey === "AIzaSyDfH1YqeE2SMwipgaAywU5WCwog9IjBKhI") {
     return getFallbackResponse(messages[messages.length - 1]?.content || "");
   }
 
